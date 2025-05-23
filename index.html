@@ -338,8 +338,8 @@
     <div class="particles-bg" id="particlesBg"></div>
 
     <!-- MUSIC: Yahan apni renamed music file ka naam likha hai -->
-    <!-- Ensure 'Dunki Drop 5_ O Maahi (Slowed   Reverb) _ Arijit Singh _ Shah Rukh Khan _ Lo-fi Song _ Lyrics(MP3_160K).mp3' is in the same folder as this HTML file -->
-    <audio id="bgMusic" loop src="Dunki Drop 5_ O Maahi (Slowed   Reverb) _ Arijit Singh _ Shah Rukh Khan _ Lo-fi Song _ Lyrics(MP3_160K).mp3"></audio>
+    <!-- Ensure 'Dunki _ O Maahi Song (Slowed Reverb)(MP3_160K).mp3' is in the same folder as this HTML file -->
+    <audio id="bgMusic" loop src="Dunki _ O Maahi Song (Slowed Reverb)(MP3_160K).mp3"></audio>
 
     <div class="container">
         <div class="typing-container">
@@ -533,5 +533,24 @@
             }, 120);
         }
     </script>
+<audio id="bgMusic" src="Dunki _ O Maahi Song (Slowed Reverb)(MP3_160K).mp3" loop></audio>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    function playAudio() {
+      var audio = document.getElementById('bgMusic');
+      audio.volume = 0.6;
+      audio.play().catch(function (error) {
+        console.log("Autoplay blocked. Will play on interaction.");
+      });
+      document.removeEventListener('click', playAudio);
+      document.removeEventListener('touchstart', playAudio);
+    }
+
+    document.addEventListener('click', playAudio);
+    document.addEventListener('touchstart', playAudio);
+  });
+</script>
+
 </body>
 </html>
