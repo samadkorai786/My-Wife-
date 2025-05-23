@@ -40,12 +40,14 @@
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            overflow: hidden;
+            overflow-x: hidden; 
+            overflow-y: auto; 
             background: linear-gradient(-45deg, var(--bg-grad-1), var(--bg-grad-2), var(--bg-grad-3), var(--bg-grad-4));
             background-size: 400% 400%;
             animation: gradientFlowBG 18s ease infinite;
             text-align: center;
             position: relative;
+            padding: 20px 0; 
         }
 
         @keyframes gradientFlowBG {
@@ -74,34 +76,24 @@
         }
 
         @keyframes driftAndFade {
-            0% {
-                transform: translateY(5vh) scale(0.3);
-                opacity: 0;
-            }
-            20% {
-                opacity: 0.8;
-                 transform: scale(1);
-            }
-            80% {
-                opacity: 0.8;
-            }
-            100% {
-                transform: translateY(-105vh) translateX(calc(10vw * (var(--random-x) - 0.5))) scale(0.5);
-                opacity: 0;
-            }
+            0% { transform: translateY(5vh) scale(0.3); opacity: 0; }
+            20% { opacity: 0.8; transform: scale(1); }
+            80% { opacity: 0.8; }
+            100% { transform: translateY(-105vh) translateX(calc(10vw * (var(--random-x) - 0.5))) scale(0.5); opacity: 0; }
         }
 
         .container {
             position: relative;
             z-index: 2;
-            padding: 35px 45px;
-            background-color: rgba(20, 0, 30, 0.35); /* Darker, more translucent */
+            padding: 30px 35px; 
+            background-color: rgba(20, 0, 30, 0.35);
             border-radius: 30px;
             box-shadow: 0 0 20px var(--shadow-color-light),
                         0 10px 40px var(--shadow-color-dark),
                         inset 0 0 15px rgba(255, 255, 255, 0.1);
-            max-width: 90%;
-            width: 700px;
+            width: 90%; 
+            max-width: 700px; 
+            margin: 20px auto; 
             backdrop-filter: blur(8px) saturate(150%);
             -webkit-backdrop-filter: blur(8px) saturate(150%);
             border: 1.5px solid rgba(255, 255, 255, 0.18);
@@ -111,28 +103,33 @@
             transform: scale(1.01);
             box-shadow: 0 0 30px var(--shadow-color-light),
                         0 15px 50px var(--shadow-color-dark),
-                        inset 0 0 20px rgba(255, 255, 255, 0.15);
+                        inset 0 0 20px rgba(255, 255, 255, 0.15),
+                        0 0 15px var(--accent-color);
         }
 
-
         .typing-container {
-            min-height: 120px; 
-            margin-bottom: 40px;
+            min-height: 100px; 
+            margin-bottom: 30px; 
             display: flex;
             justify-content: center;
             align-items: center;
+            width: 100%; 
         }
 
         .typing-text {
-            font-size: 2.8em; 
-            font-family: 'Great Vibes', cursive; /* New Romantic Font */
+            font-size: 2.6em; 
+            font-family: 'Great Vibes', cursive;
             color: var(--romantic-text-color);
-            text-shadow: 1px 1px 1px rgba(0,0,0,0.3), 0 0 15px var(--accent-color), 0 0 25px var(--accent-color);
-            white-space: nowrap;
-            overflow: hidden;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3), 
+                         0 0 10px var(--romantic-text-color), 
+                         0 0 25px var(--accent-color), 
+                         0 0 40px var(--accent-color);
+            white-space: nowrap; 
+            overflow: hidden; 
             border-right: .08em solid var(--accent-color);
             animation: typingEffect 3.8s steps(45, end), blinkCaretEffect .8s step-end infinite;
             letter-spacing: 1.5px;
+            max-width: 100%; 
         }
 
         @keyframes typingEffect {
@@ -144,10 +141,25 @@
             from, to { border-color: transparent }
             50% { border-color: var(--accent-color); }
         }
+        
+        @keyframes subtleButtonPulse {
+            0%, 100% { 
+                transform: scale(1); 
+                box-shadow: 0 7px 18px var(--shadow-color-dark), 
+                            0 0 8px color-mix(in srgb, var(--accent-color) 40%, transparent) inset,
+                            0 0 0 2px transparent;
+            }
+            50% { 
+                transform: scale(1.03); 
+                box-shadow: 0 9px 22px color-mix(in srgb, var(--shadow-color-dark) 120%, black), 
+                            0 0 10px color-mix(in srgb, var(--accent-color) 55%, transparent) inset,
+                            0 0 0 2px transparent;
+            }
+        }
 
         .reveal-button {
-            padding: 20px 40px;
-            font-size: 1.35em;
+            padding: 18px 35px; 
+            font-size: 1.25em; 
             font-weight: 600;
             font-family: 'Poppins', sans-serif;
             color: var(--button-text-color);
@@ -158,27 +170,30 @@
             transition: all 0.35s cubic-bezier(0.19, 1, 0.22, 1);
             box-shadow: 0 7px 18px var(--shadow-color-dark), 
                         0 0 8px color-mix(in srgb, var(--accent-color) 50%, transparent) inset,
-                        0 0 0 2px transparent; /* For focus ring */
-            margin-top: 30px;
+                        0 0 0 2px transparent; 
+            margin-top: 25px; 
             letter-spacing: 0.8px;
+            animation: subtleButtonPulse 2.8s infinite ease-in-out;
         }
 
         .reveal-button:hover, .reveal-button:focus {
+            animation: none;
             color: var(--romantic-text-color);
             background-image: linear-gradient(135deg, var(--button-hover-bg-start), var(--button-hover-bg-end));
-            transform: translateY(-6px) scale(1.1);
+            transform: translateY(-6px) scale(1.05); 
             box-shadow: 0 12px 28px rgba(0,0,0,0.5), 
                         0 0 12px var(--accent-color) inset,
-                        0 0 0 2px var(--accent-color); /* Visible focus ring */
+                        0 0 10px var(--accent-color),
+                        0 0 0 2px var(--accent-color); 
             outline: none;
         }
 
         .surprise-message-container {
             display: none;
-            padding: 35px;
-            margin-top: 35px;
+            padding: 30px; 
+            margin-top: 30px;
             animation: revealContent 1.3s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
-            background-color: rgba(0,0,0,0.1); /* Subtle bg for message area */
+            background-color: rgba(0,0,0,0.1); 
             border-radius: 20px;
         }
 
@@ -187,35 +202,58 @@
             100% { opacity: 1; transform: translateY(0) scale(1); }
         }
 
+        .names-dedication {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.3em; 
+            color: var(--romantic-text-color);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2), 
+                         0 0 8px var(--romantic-text-color), 
+                         0 0 20px var(--accent-color);
+            margin-bottom: 15px; 
+            line-height: 1.2;
+        }
+        .names-dedication .heart-symbol {
+            color: var(--heart-color);
+            text-shadow: 0 0 10px var(--heart-color), 0 0 5px #fff;
+            font-size: 0.9em; 
+            display: inline-block;
+            transform: translateY(-2px); 
+        }
+
         .surprise-message-container h2 {
             font-family: 'Great Vibes', cursive;
-            font-size: 4em; 
+            font-size: 3.5em; 
             color: var(--accent-color);
-            text-shadow: 2px 2px 6px var(--shadow-color-dark), 0 0 20px var(--accent-color), 0 0 30px var(--accent-color);
-            margin-bottom: 25px;
+            text-shadow: 2px 2px 5px var(--shadow-color-dark), 
+                         0 0 15px var(--romantic-text-color), 
+                         0 0 30px var(--accent-color), 
+                         0 0 50px var(--accent-color);
+            margin-bottom: 20px; 
             line-height: 1.1;
         }
 
         .surprise-message-container p {
-            font-size: 1.6em; 
-            line-height: 1.75;
+            font-size: 1.4em; 
+            line-height: 1.7;
             color: var(--primary-text-color);
             font-weight: 300;
             text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
-            margin-bottom: 20px;
+            margin-bottom: 18px; 
         }
         .surprise-message-container p.signature {
-            font-size: 1.7em; /* Signature slightly larger */
+            font-size: 1.5em; 
             font-family: 'Great Vibes', cursive;
-            font-weight: 400; /* Great Vibes typically doesn't need bold for script look */
+            font-weight: 400; 
             color: var(--romantic-text-color);
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.4), 0 0 10px var(--accent-color);
-            margin-top: 30px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.4), 
+                         0 0 8px var(--romantic-text-color),
+                         0 0 15px var(--accent-color);
+            margin-top: 25px; 
         }
 
         .floating-heart {
             position: fixed;
-            font-size: 1.2em; /* Base size */
+            font-size: 1.2em; 
             color: var(--heart-color);
             animation: riseAndShine 12s infinite ease-in-out;
             opacity: 0;
@@ -233,7 +271,7 @@
         
         .heart-rain-drop {
             position: fixed;
-            font-size: 12px; /* Base */
+            font-size: 12px; 
             color: var(--accent-color); 
             animation: intenseHeartRain 1.2s linear;
             opacity: 0;
@@ -249,42 +287,59 @@
         }
 
         /* Responsive adjustments */
-        @media (max-width: 768px) {
+        @media (max-width: 768px) { /* Tablets and large mobiles */
             .container {
                 padding: 25px 20px;
-                width: calc(100% - 30px);
-                margin-left: 15px;
-                margin-right: 15px;
+                width: calc(100% - 40px); 
             }
-            .typing-text {
-                font-size: 2em; /* Adjusted for 'Great Vibes' which can be large */
-                min-height: 100px;
-            }
-             .typing-container { min-height: 100px; }
-            .reveal-button { padding: 18px 35px; font-size: 1.2em; }
-            .surprise-message-container h2 { font-size: 3em; }
-            .surprise-message-container p { font-size: 1.35em; }
-             .surprise-message-container p.signature { font-size: 1.4em; }
+            .typing-container { min-height: 90px; margin-bottom: 25px;}
+            .typing-text { font-size: 2em; } 
+            .reveal-button { padding: 16px 30px; font-size: 1.15em; }
+            .names-dedication { font-size: 2em; margin-bottom: 15px; }
+            .surprise-message-container h2 { font-size: 2.8em; margin-bottom: 18px;}
+            .surprise-message-container p { font-size: 1.25em; margin-bottom: 15px;}
+            .surprise-message-container p.signature { font-size: 1.35em; margin-top: 20px;}
         }
-        @media (max-width: 480px) {
-            .container { padding: 20px 15px; border-radius: 25px; }
-            .typing-text {
-                font-size: 1.6em; /* Further adjust 'Great Vibes' */
-                min-height: 80px;
-                /* Consider white-space: normal & no animation for very small if clipping */
+
+        @media (max-width: 480px) { /* Smaller mobiles */
+            body { padding: 10px 0; }
+            .container { 
+                padding: 20px 15px; 
+                border-radius: 25px;
+                width: calc(100% - 30px); 
             }
-             .typing-container { min-height: 80px; }
-            .reveal-button { padding: 15px 30px; font-size: 1.1em; }
-             .surprise-message-container h2 { font-size: 2.4em; }
-            .surprise-message-container p { font-size: 1.15em; }
-             .surprise-message-container p.signature { font-size: 1.25em; }
+            .typing-container { min-height: 80px; margin-bottom: 20px; }
+            .typing-text { font-size: 1.7em; } 
+            .reveal-button { padding: 15px 25px; font-size: 1.05em; }
+            .names-dedication { font-size: 1.8em; margin-bottom: 10px;}
+            .surprise-message-container h2 { font-size: 2.2em; margin-bottom: 15px;}
+            .surprise-message-container p { font-size: 1.1em; margin-bottom: 12px;}
+            .surprise-message-container p.signature { font-size: 1.2em; margin-top: 18px;}
             .floating-heart { font-size: 1em; } 
+        }
+        
+        @media (max-width: 370px) { /* Very small mobiles */
+            .container {
+                padding: 15px 10px;
+                width: calc(100% - 20px); 
+            }
+            .typing-container { min-height: 70px; margin-bottom: 15px; }
+            .typing-text { font-size: 1.45em; } 
+            .reveal-button { padding: 12px 20px; font-size: 1em; }
+            .names-dedication { font-size: 1.5em; }
+            .surprise-message-container h2 { font-size: 2em; }
+            .surprise-message-container p { font-size: 1em; }
+            .surprise-message-container p.signature { font-size: 1.1em; }
         }
 
     </style>
 </head>
 <body>
     <div class="particles-bg" id="particlesBg"></div>
+
+    <!-- MUSIC: Yahan apni renamed music file ka naam likha hai -->
+    <!-- Ensure 'Dunki Drop 5_ O Maahi (Slowed   Reverb) _ Arijit Singh _ Shah Rukh Khan _ Lo-fi Song _ Lyrics(MP3_160K).mp3' is in the same folder as this HTML file -->
+    <audio id="bgMusic" loop src="Dunki Drop 5_ O Maahi (Slowed   Reverb) _ Arijit Singh _ Shah Rukh Khan _ Lo-fi Song _ Lyrics(MP3_160K).mp3"></audio>
 
     <div class="container">
         <div class="typing-container">
@@ -294,6 +349,8 @@
         <button id="revealButton" class="reveal-button">Khaas Tohfa Kholo, Mehak!</button>
 
         <div id="surpriseMessage" class="surprise-message-container">
+            <p class="names-dedication">Samad <span class="heart-symbol">❤️</span> Mehak</p>
+            
             <h2>Meri Pyaari Mehak,</h2>
             <p>
                 Tum meri zindagi ka wo haseen khwaab ho jo haqeeqat ban gaya hai. 
@@ -308,12 +365,18 @@
 
     <script>
         const romanticLines = [
-            "Mehak, tum meri zindagi ho...",
-            "Tumhari aankhon mein mera jahaan hai...",
-            "Har saans tumhara naam leti hai...",
-            "Tumhare saath har pal khaas hai...",
-            "Meri har khushi tumse judi hai, Mehak...",
-            "Sirf tum, aur hamesha tum, Mehak!"
+            "Pura Perhna Samjhi 😾",
+            "Bhoot Mehnat Ki Hay 🙄", 
+            "Mry Dil Ki Bate Hy",
+            "Isme Bubu Smjhi🥰",
+            "Mehak, tum meri zindagi ho💕...",
+            "Tumhari aankhon mein mera jahaan hai❤️...",
+            "Har saans tumhara naam leti hai💞...",
+            "Tumhare saath har pal khaas hai🫂...",
+            "Meri har khushi tumse judi hai, Mehak🥰...",
+            "Sirf tum, aur hamesha tum, Mehak🥰!"
+            "I Love You Bubu Meri Jan 😘",
+            "Ab Toohfa kholo 😁",
         ];
         let currentLineIndex = 0;
         let charIndex = 0;
@@ -322,6 +385,7 @@
         const surpriseMessageContainer = document.getElementById('surpriseMessage');
         const typingContainer = document.querySelector('.typing-container');
         const particlesContainer = document.getElementById('particlesBg');
+        const bgMusic = document.getElementById('bgMusic');
 
         let typingTimeout, eraseTimeout;
 
@@ -330,7 +394,7 @@
             if (typingElement && charIndex < romanticLines[currentLineIndex].length) {
                 typingElement.textContent += romanticLines[currentLineIndex].charAt(charIndex);
                 charIndex++;
-                typingTimeout = setTimeout(typeLine, 95); // Adjusted for 'Great Vibes'
+                typingTimeout = setTimeout(typeLine, 95); 
             } else if (typingElement) {
                 eraseTimeout = setTimeout(eraseLine, 3000); 
             }
@@ -344,65 +408,54 @@
                 eraseTimeout = setTimeout(eraseLine, 55); 
             } else if (typingElement) {
                 currentLineIndex = (currentLineIndex + 1) % romanticLines.length;
-                // Ensure the animation class is reset for the next line
                 typingElement.classList.remove('typing-text');
-                void typingElement.offsetWidth; // Trigger reflow
+                void typingElement.offsetWidth; 
                 typingElement.classList.add('typing-text');
                 typingTimeout = setTimeout(typeLine, 600); 
             }
         }
         
         if (typingElement) {
-             setTimeout(typeLine, 700); // Initial delay
+             setTimeout(typeLine, 700); 
         }
 
-        // Background Particles
         function createBgParticle() {
-            if (!particlesContainer || document.querySelectorAll('.particle').length > 40) return; // Limit particles
+            if (!particlesContainer || document.querySelectorAll('.particle').length > 40) return; 
 
             const particle = document.createElement('div');
             particle.classList.add('particle');
-            
-            const size = Math.random() * 5 + 2; // 2px to 7px
+            const size = Math.random() * 5 + 2; 
             particle.style.width = `${size}px`;
             particle.style.height = `${size}px`;
-            
             particle.style.left = Math.random() * 100 + 'vw';
-            particle.style.setProperty('--random-x', Math.random()); // For horizontal drift in CSS
-            
-            const animDuration = Math.random() * 10 + 10; // 10s to 20s
+            particle.style.setProperty('--random-x', Math.random()); 
+            const animDuration = Math.random() * 10 + 10; 
             particle.style.animationDuration = `${animDuration}s`;
-            particle.style.animationDelay = Math.random() * animDuration + 's'; // Staggered start
+            particle.style.animationDelay = Math.random() * animDuration + 's'; 
 
             particlesContainer.appendChild(particle);
-
             setTimeout(() => {
                 if (particle) particle.remove();
             }, animDuration * 1000 + parseFloat(particle.style.animationDelay.replace('s','')) * 1000 + 200);
         }
-        for (let i = 0; i < 25; i++) { // Create initial batch of particles
+        for (let i = 0; i < 25; i++) { 
             createBgParticle();
         }
-        setInterval(createBgParticle, 2000); // Add new particles periodically
+        setInterval(createBgParticle, 2000); 
 
 
-        // Floating Hearts (Foreground)
         function createFloatingHeart() {
             if (document.body.querySelectorAll('.floating-heart').length > 25) return; 
 
             const heart = document.createElement('div');
             heart.classList.add('floating-heart');
             heart.innerHTML = '❤'; 
-            
             heart.style.left = Math.random() * 100 + 'vw';
-            const scale = Math.random() * 0.7 + 0.7; // Scale 0.7 to 1.4
+            const scale = Math.random() * 0.7 + 0.7; 
             heart.style.transform = `scale(${scale})`;
-            
-            heart.style.animationDuration = Math.random() * 8 + 10 + 's'; // 10s to 18s
+            heart.style.animationDuration = Math.random() * 8 + 10 + 's'; 
             heart.style.animationDelay = Math.random() * 7 + 's';
-
             document.body.appendChild(heart);
-
             setTimeout(() => {
                 if (heart) heart.remove();
             }, parseFloat(heart.style.animationDuration.replace('s','')) * 1000 + parseFloat(heart.style.animationDelay.replace('s','')) * 1000 + 200);
@@ -419,35 +472,49 @@
             }
         }, 3500);
 
+        function playMusicOnFirstInteraction() {
+            if (bgMusic && bgMusic.paused) {
+                bgMusic.play().catch(error => {
+                    console.log("Music autoplay on first interaction was prevented. Waiting for button click.", error);
+                });
+            }
+        }
+        
+        document.body.addEventListener('click', playMusicOnFirstInteraction, { once: true });
+        document.body.addEventListener('touchstart', playMusicOnFirstInteraction, { once: true });
 
-        // Reveal Surprise Logic
+
         if (revealButton) {
             revealButton.addEventListener('click', () => {
                 if (typingContainer) typingContainer.style.display = 'none'; 
                 if (revealButton) revealButton.style.display = 'none';     
                 if (surpriseMessageContainer) surpriseMessageContainer.style.display = 'block';
+                
+                if (bgMusic) {
+                    // Set volume to a lower level (e.g., 50%) to not overpower the experience
+                    bgMusic.volume = 0.4; // Value between 0.0 (mute) and 1.0 (full)
+                    bgMusic.play().catch(error => console.log("Error playing music on button click:", error));
+                }
+
                 startHeartRain();
                 clearInterval(floatingHeartInterval);
-                // Optional: Clear floating hearts when rain starts
-                // document.querySelectorAll('.floating-heart').forEach(h => h.remove());
+                
+                document.body.removeEventListener('click', playMusicOnFirstInteraction);
+                document.body.removeEventListener('touchstart', playMusicOnFirstInteraction);
             });
         }
 
-        // Heart Rain
         function createHeartRainDrop() {
             if (document.body.querySelectorAll('.heart-rain-drop').length > 120) return; 
 
             const drop = document.createElement('div');
             drop.classList.add('heart-rain-drop');
             drop.innerHTML = '❤'; 
-            
             drop.style.left = Math.random() * 100 + 'vw';
-            const scale = Math.random() * 0.6 + 0.6; // Scale 0.6 to 1.2
+            const scale = Math.random() * 0.6 + 0.6; 
             drop.style.transform = `scale(${scale})`;
             drop.style.animationDelay = Math.random() * 1.5 + 's'; 
-
             document.body.appendChild(drop);
-
             setTimeout(() => {
                 if (drop) drop.remove();
             }, 1200 + parseFloat(drop.style.animationDelay.replace('s','')) * 1000 + 200);
@@ -462,7 +529,7 @@
             const continuousRainInterval = setInterval(() => {
                 createHeartRainDrop();
                 rainIntervalCount++;
-                if (rainIntervalCount > 40) { // Rain for about 40 * 120ms = 4.8 more seconds
+                if (rainIntervalCount > 40) { 
                     clearInterval(continuousRainInterval);
                 }
             }, 120);
