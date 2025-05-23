@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="ur-Latn"> <!-- Changed lang to ur-Latn for Roman Urdu -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ek Khaas Paigham Tumhare Liye!</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Parisienne&family=Poppins:wght@300;400;600&display=swap');
+
+        :root {
+            --bg-grad-1: #6a0572; /* Deep Purple */
+            --bg-grad-2: #ab87ff; /* Lavender */
+            --bg-grad-3: #f76b8a; /* Soft Pink */
+            --bg-grad-4: #ff9a8b; /* Peachy Pink */
+            
+            --primary-text-color: #ffffff;
+            --accent-color: #ff8fab; /* Brighter Pink for accents */
+            --heart-color: #ff4d6d; /* Deeper Pink/Red for hearts */
+            --button-bg: #ffffff;
+            --button-text-color: var(--bg-grad-3);
+            --shadow-color-light: rgba(255, 255, 255, 0.3);
+            --shadow-color-dark: rgba(0, 0, 0, 0.3);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            color: var(--primary-text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow: hidden;
+            background: linear-gradient(-45deg, var(--bg-grad-1), var(--bg-grad-2), var(--bg-grad-3), var(--bg-grad-4));
+            background-size: 400% 400%;
+            animation: gradientFlow 20s ease infinite;
+            text-align: center;
+            position: relative; /* For absolute positioning of hearts */
+        }
+
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .overlay { /* Subtle texture overlay */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* background-image: url('data:image/svg+xml,...'); You could add a subtle SVG pattern here */
+            opacity: 0.05; /* Very subtle */
+            pointer-events: none; /* So it doesn't interfere with clicks */
+            z-index: 0;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            padding: 30px 40px; /* Increased padding */
+            background-color: rgba(0, 0, 0, 0.25); /* Slightly more opaque for readability */
+            border-radius: 25px; /* More rounded */
+            box-shadow: 0 15px 35px var(--shadow-color-dark), 0 0 15px var(--shadow-color-light) inset;
+            max-width: 90%;
+            width: 650px; /* Slightly wider */
+            backdrop-filter: blur(5px); /* Frosted glass effect */
+            -webkit-backdrop-filter: blur(5px); /* For Safari */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .typing-container {
+            min-height: 110px; /* Adjusted for potentially longer lines or larger font */
+            margin-bottom: 35px;
+            display: flex; /* To center the typing text better */
+            justify-content: center;
+            align-items: center;
+        }
+
+        .typing-text {
+            font-size: 2em; /* Slightly larger */
+            font-family: 'Parisienne', cursive; /* More elegant script font */
+            color: var(--primary-text-color);
+            text-shadow: 1px 1px 2px var(--shadow-color-dark), 0 0 10px var(--accent-color); /* Enhanced shadow/glow */
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: .1em solid var(--accent-color);
+            animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+            letter-spacing: 1px; /* A bit more spacing */
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--accent-color); }
+        }
+
+        .reveal-button {
+            padding: 18px 35px; /* Larger button */
+            font-size: 1.25em; /* Larger font */
+            font-weight: 600; /* Bolder */
+            font-family: 'Poppins', sans-serif;
+            color: var(--button-text-color);
+            background-color: var(--button-bg);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smoother transition */
+            box-shadow: 0 8px 20px var(--shadow-color-dark), 0 0 5px var(--accent-color) inset;
+            margin-top: 25px;
+            letter-spacing: 0.5px;
+        }
+
+        .reveal-button:hover, .reveal-button:focus {
+            background-color: var(--accent-color);
+            color: var(--primary-text-color);
+            transform: translateY(-5px) scale(1.08); /* More pronounced hover */
+            box-shadow: 0 12px 25px rgba(0,0,0,0.5), 0 0 10px var(--accent-color);
+            outline: none;
+        }
+
+        .surprise-message-container {
+            display: none;
+            padding: 30px;
+            margin-top: 30px;
+            animation: fadeInScaleUp 1.2s cubic-bezier(0.165, 0.84, 0.44, 1) forwards; /* New animation */
+        }
+
+        @keyframes fadeInScaleUp {
+            0% { opacity: 0; transform: translateY(30px) scale(0.9); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .surprise-message-container h2 {
+            font-family: 'Parisienne', cursive;
+            font-size: 3.5em; /* Even larger */
+            color: var(--accent-color);
+            text-shadow: 2px 2px 5px var(--shadow-color-dark), 0 0 15px var(--accent-color);
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .surprise-message-container p {
+            font-size: 1.5em; /* Larger paragraph text */
+            line-height: 1.7;
+            color: var(--primary-text-color);
+            font-weight: 300; /* Lighter for Poppins */
+            text-shadow: 1px 1px 3px var(--shadow-color-dark);
+            margin-bottom: 15px;
+        }
+        .surprise-message-container p.signature {
+            font-size: 1.3em;
+            font-style: italic;
+            margin-top: 25px;
+        }
+
+        .heart {
+            position: fixed;
+            font-size: 1em; /* Base size, will be scaled */
+            color: var(--heart-color);
+            animation: floatHeartAway 10s infinite ease-in-out;
+            opacity: 0;
+            text-shadow: 0 0 8px var(--heart-color), 0 0 15px var(--heart-color), 0 0 5px var(--primary-text-color); /* Enhanced Glow */
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        @keyframes floatHeartAway {
+            0% {
+                transform: translateY(10vh) translateX(-5vw) rotate(0deg) scale(0.5);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.9;
+                transform: translateY(0vh) translateX(0vw) rotate(-10deg) scale(1);
+            }
+            90% {
+                opacity: 0.9;
+                transform: translateY(-80vh) translateX(5vw) rotate(10deg) scale(1.2);
+            }
+            100% {
+                transform: translateY(-110vh) translateX(-5vw) rotate(0deg) scale(0.5); /* Ensure it goes far off screen */
+                opacity: 0;
+            }
+        }
+        
+        .heart-rain-drop {
+            position: fixed;
+            font-size: 10px; /* Base size */
+            color: var(--accent-color); 
+            animation: heartRainFallNew 1.5s linear; /* Faster, more direct rain */
+            opacity: 0; /* Start invisible */
+            text-shadow: 0 0 5px var(--accent-color), 0 0 2px #fff;
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        @keyframes heartRainFallNew {
+            0% {
+                transform: translateY(-10vh) scale(0.7);
+                opacity: 0;
+            }
+            20% { /* Appear quicker */
+                opacity: 0.9;
+                transform: scale(1.2);
+            }
+            100% {
+                transform: translateY(105vh) scale(0.6);
+                opacity: 0;
+            }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px 20px;
+                width: auto; /* Let it be fluid */
+                margin-left: 15px;
+                margin-right: 15px;
+                max-width: calc(100% - 30px); /* Ensure padding from screen edges */
+            }
+            .typing-text {
+                font-size: 1.6em;
+                min-height: 90px; /* Adjust if lines wrap, or ensure font scales enough */
+                white-space: normal; /* Allow wrapping for very long lines on small screens */
+                border-right: none; /* Remove cursor if wrapping */
+                animation: none; /* Disable typing animation if wrapping, or make it per-word */
+                /* If keeping animation, ensure container width is enough or text is shorter */
+                white-space: nowrap; /* Re-enable for consistency, ensure lines are short or font shrinks enough */
+                border-right: .1em solid var(--accent-color); /* Restore cursor */
+                animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite; /* Restore animation */
+            }
+             .typing-container {
+                min-height: 90px;
+            }
+            .reveal-button {
+                padding: 15px 30px;
+                font-size: 1.1em;
+            }
+            .surprise-message-container h2 {
+                font-size: 2.8em;
+            }
+            .surprise-message-container p {
+                font-size: 1.3em;
+            }
+             .surprise-message-container p.signature {
+                font-size: 1.1em;
+            }
+        }
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px 15px;
+                 border-radius: 20px;
+            }
+            .typing-text {
+                font-size: 1.3em; /* Further reduce for small screens */
+                min-height: 70px;
+            }
+             .typing-container {
+                min-height: 70px;
+            }
+            .reveal-button {
+                padding: 12px 25px;
+                font-size: 1em;
+            }
+             .surprise-message-container h2 {
+                font-size: 2.2em;
+            }
+            .surprise-message-container p {
+                font-size: 1.1em;
+            }
+             .surprise-message-container p.signature {
+                font-size: 1em;
+            }
+            .heart { font-size: 0.8em; } /* Scale down floating hearts too */
+        }
+
+    </style>
+</head>
+<body>
+    <div class="overlay"></div>
+
+    <div class="container">
+        <div class="typing-container">
+            <p id="romantic-line" class="typing-text"></p>
+        </div>
+
+        <button id="revealButton" class="reveal-button">Tohfa Kholo!</button>
+
+        <div id="surpriseMessage" class="surprise-message-container">
+            <h2>Meri Pyaari Humsafar,</h2>
+            <p>
+                Tum meri zindagi ki sabse haseen kahani ho. Har lamha tumhare saath guzarna ek khwaab jaisa hai,
+                ek sukoon hai jo lafzon mein bayaan nahi ho sakta.
+            </p>
+            <p>
+                Main tumse beintehaa mohabbat karta hoon, aaj, kal, aur hamesha! ❤️
+            </p>
+            <p class="signature">Bohat saare pyaar ke saath,<br>Tumhara Shohar</p>
+        </div>
+    </div>
+
+    <script>
+        const romanticLines = [
+            "Tum meri zindagi mein roshni ki tarah ho...",
+            "Har subah tumhare khayal se shuru hoti hai...",
+            "Tumhari muskurahat meri duniya hai...",
+            "Mera dil sirf tumhare liye dhadakta hai...",
+            "Tumhare bina, har khushi adhoori hai...",
+            "Meri har dua mein tumhara naam hai..."
+        ];
+        let currentLineIndex = 0;
+        let charIndex = 0;
+        const typingElement = document.getElementById('romantic-line');
+        const revealButton = document.getElementById('revealButton');
+        const surpriseMessageContainer = document.getElementById('surpriseMessage');
+        const typingContainer = document.querySelector('.typing-container');
+
+        let typingTimeout, eraseTimeout; // To manage timeouts
+
+        function typeLine() {
+            clearTimeout(eraseTimeout); // Clear any pending erase
+            if (typingElement && charIndex < romanticLines[currentLineIndex].length) {
+                typingElement.textContent += romanticLines[currentLineIndex].charAt(charIndex);
+                charIndex++;
+                typingTimeout = setTimeout(typeLine, 80); // Adjusted typing speed
+            } else if (typingElement) {
+                eraseTimeout = setTimeout(eraseLine, 2500); 
+            }
+        }
+
+        function eraseLine() {
+            clearTimeout(typingTimeout); // Clear any pending type
+            if (typingElement && charIndex > 0) {
+                typingElement.textContent = romanticLines[currentLineIndex].substring(0, charIndex - 1);
+                charIndex--;
+                eraseTimeout = setTimeout(eraseLine, 40); // Adjusted erasing speed
+            } else if (typingElement) {
+                currentLineIndex = (currentLineIndex + 1) % romanticLines.length;
+                typingElement.classList.remove('typing-text');
+                void typingElement.offsetWidth; 
+                typingElement.classList.add('typing-text');
+                typingTimeout = setTimeout(typeLine, 500); 
+            }
+        }
+        
+        if (typingElement) { // Check if element exists
+             setTimeout(typeLine, 500);
+        }
+
+
+        // Floating Hearts
+        function createFloatingHeart() {
+            if (document.body.querySelectorAll('.heart').length > 30) return; // Limit max hearts
+
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '&#10084;'; // HTML entity for heart
+            
+            heart.style.left = Math.random() * 100 + 'vw';
+            // Randomize scale for visual variety, base size controlled by .heart font-size
+            const scale = Math.random() * 0.8 + 0.6; // Scale between 0.6 and 1.4
+            heart.style.transform = `scale(${scale})`;
+            
+            heart.style.animationDuration = Math.random() * 7 + 8 + 's'; // 8s to 15s
+            heart.style.animationDelay = Math.random() * 6 + 's';
+
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                if (heart) heart.remove();
+            }, parseFloat(heart.style.animationDuration.replace('s','')) * 1000 + parseFloat(heart.style.animationDelay.replace('s','')) * 1000 + 200);
+        }
+
+        for (let i = 0; i < 12; i++) { // Reduced initial hearts for less clutter, more will be added
+            createFloatingHeart();
+        }
+        // Periodically add more floating hearts if the reveal hasn't happened
+        let floatingHeartInterval = setInterval(() => {
+            if (surpriseMessageContainer.style.display !== 'block') {
+                createFloatingHeart();
+            } else {
+                clearInterval(floatingHeartInterval); // Stop adding once message is revealed
+            }
+        }, 4000);
+
+
+        // Reveal Surprise Logic
+        if (revealButton) {
+            revealButton.addEventListener('click', () => {
+                if (typingContainer) typingContainer.style.display = 'none'; 
+                if (revealButton) revealButton.style.display = 'none';     
+                if (surpriseMessageContainer) surpriseMessageContainer.style.display = 'block';
+                startHeartRain();
+                clearInterval(floatingHeartInterval); // Stop creating floating hearts
+                // Optional: Clear existing floating hearts for focus on rain
+                // document.querySelectorAll('.heart').forEach(h => h.remove());
+            });
+        }
+
+        // Heart Rain
+        function createHeartRainDrop() {
+            if (document.body.querySelectorAll('.heart-rain-drop').length > 100) return; // Limit rain drops
+
+            const drop = document.createElement('div');
+            drop.classList.add('heart-rain-drop');
+            drop.innerHTML = '&#10084;'; 
+            
+            drop.style.left = Math.random() * 100 + 'vw';
+            const scale = Math.random() * 0.5 + 0.7; // Random scale for variety (0.7 to 1.2)
+            drop.style.transform = `scale(${scale})`;
+            drop.style.animationDelay = Math.random() * 1.8 + 's'; 
+
+            document.body.appendChild(drop);
+
+            setTimeout(() => {
+                if (drop) drop.remove();
+            }, 1500 + parseFloat(drop.style.animationDelay.replace('s','')) * 1000 + 200); // 1.5s animation + delay
+        }
+
+        function startHeartRain() {
+            const rainDensity = 70; // Number of hearts in the initial burst
+            for (let i = 0; i < rainDensity; i++) { 
+                setTimeout(createHeartRainDrop, Math.random() * 1200); 
+            }
+            // Continue raining for a short period
+            let rainIntervalCount = 0;
+            const continuousRainInterval = setInterval(() => {
+                createHeartRainDrop();
+                rainIntervalCount++;
+                if (rainIntervalCount > 30) { // Rain for about 30 * 150ms = 4.5 more seconds
+                    clearInterval(continuousRainInterval);
+                }
+            }, 150);
+        }
+
+    </script>
+</body>
+</html>
